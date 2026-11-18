@@ -13,7 +13,8 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pathsnap.data import ROOT, get_trip, point_seg_dist, trip_ids
 from pathsnap.features import FEATURES, build_features
-from pathsnap.hmm import argmax_decode, fill_route, viterbi
+from pathsnap.evaluate import argmax_decode
+from pathsnap.hmm import fill_route, viterbi
 
 OUT = os.path.join(ROOT, "results", "maps")
 LEGEND = """<div style="position:fixed;bottom:24px;left:24px;z-index:9999;background:#fff;padding:10px 14px;

@@ -23,7 +23,8 @@ from sklearn.model_selection import GroupKFold
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pathsnap.data import ROOT, get_trip, trip_ids
 from pathsnap.features import FEATURES, labelled_features
-from pathsnap.hmm import DEFAULTS, argmax_decode, continuity, fill_route, route_scores, viterbi
+from pathsnap.evaluate import argmax_decode, continuity
+from pathsnap.hmm import DEFAULTS, fill_route, route_scores, viterbi
 
 RES = os.path.join(ROOT, "results")
 RELIABLE_M = 50.0

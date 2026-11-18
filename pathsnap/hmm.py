@@ -10,22 +10,10 @@ dead-ends on disconnected candidates; it just strongly prefers connected ones.
 import numpy as np
 from scipy.sparse.csgraph import dijkstra
 
+from .evaluate import candidate_lists, collapse
+
 DEFAULTS = {"beta": 6.0, "w_emit": 1.0, "unreachable": -40.0, "min_limit": 300.0,
             "limit_factor": 4.0, "gap_s": 5.0, "eps": 1e-4}
-
-
-def candidate_lists(df, proba):
-    """Group the long candidate table into per-observation arrays (arcs, probs, frac)."""
-    df = df.assign(p=proba)
-    order = np.argsort(df["obs"].values, kind="stable")
-    obs = df["obs"].values[order]
-    cuts = np.flatnonzero(np.diff(obs)) + 1
-    groups = np.split(order, cuts)
-    ids = obs[np.r_[0, cuts]] if len(obs) else np.array([], int)
-    arcs = df["arc"].values
-    p = df["p"].values
-    f = df["proj_frac"].values
-    return ids, [arcs[g] for g in groups], [p[g] for g in groups], [f[g] for g in groups]
 
 
 def viterbi(trip, df, proba, params=None):
@@ -64,25 +52,6 @@ def viterbi(trip, df, proba, params=None):
         if k:
             j = back[k - 1][j]
     return dict(zip(ids.tolist(), out.tolist()))
-
-
-def argmax_decode(df, proba):
-    ids, A, Pr, _ = candidate_lists(df, proba)
-    return {i: int(a[p.argmax()]) for i, a, p in zip(ids.tolist(), A, Pr)}
-
-
-def collapse(seq):
-    seq = list(seq)
-    return [a for i, a in enumerate(seq) if i == 0 or a != seq[i - 1]]
-
-
-def continuity(trip, arc_seq):
-    """Share of consecutive distinct predicted arcs that are directly connected."""
-    s = collapse(arc_seq)
-    if len(s) < 2:
-        return 1.0
-    s = np.array(s)
-    return float(np.mean(trip.arcs[s[:-1], 1] == trip.arcs[s[1:], 0]))
 
 
 def fill_route(trip, arc_seq, max_gap_m=2000.0):

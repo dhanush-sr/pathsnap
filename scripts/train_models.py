@@ -29,9 +29,8 @@ from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pathsnap.data import ROOT, get_trip
-from pathsnap.evaluate import candidate_metrics
+from pathsnap.evaluate import argmax_decode, candidate_metrics, continuity
 from pathsnap.features import FEATURES
-from pathsnap.hmm import argmax_decode, continuity
 
 SEED = 42
 RES, PLOTS, MODELS = (os.path.join(ROOT, p) for p in ("results", "results/plots", "artifacts/models"))
