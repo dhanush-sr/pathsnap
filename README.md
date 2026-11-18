@@ -37,12 +37,14 @@ out-of-fold probabilities of the training trips only.
 | `scripts/train_models.py` | Six-model comparison and plots |
 | `scripts/bayes_opt.py` | Optuna TPE optimisation of LightGBM, tuned vs untuned comparison |
 | `scripts/evaluate_hmm.py` | Decoder tuning and classifier-only vs HMM comparison |
+| `scripts/hmm_baseline.py` | Nearest road, distance-only HMM, classifier only and classifier + HMM on student_test |
 | `scripts/make_maps.py` | Folium maps: GPS, network, reference, classifier-only and HMM routes |
 | `scripts/log_to_mlflow.py` | Records all results in MLflow and registers the final model |
 | `api/` | **Laptop 1**: FastAPI backend (`run_api.py`, `app.py`) |
 | `ui/` | **Laptop 2**: evaluator interface (`index.html`, `run_ui.py`) |
 | `artifacts/` | Final tuned model, model and HMM configuration, comparison models |
 | `results/` | Result tables, logs, plots and Folium maps |
+| `report/` | Technical report (`PathSnap_Technical_Report.pdf`), its HTML source and figures |
 
 ## Setup (both laptops)
 
@@ -126,9 +128,12 @@ python scripts/feature_selection.py
 python scripts/train_models.py          # or one model: python -m pathsnap.models.lightgbm_model
 python scripts/bayes_opt.py
 python scripts/evaluate_hmm.py
+python scripts/hmm_baseline.py
 python scripts/make_maps.py
 python scripts/log_to_mlflow.py
 ```
+
+The report is rebuilt from `report/report.html` with `sh report/build_pdf.sh`.
 
 All random seeds are 42. The Random Forest and KNN model files are too large for GitHub;
 `train_models.py` recreates them.
