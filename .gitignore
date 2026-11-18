@@ -1,0 +1,14 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+Student folder/
+data/
+PathSnap_student_materials/
+*.xlsx
+results/features_*.pkl
+artifacts/models/RandomForest.joblib
+artifacts/models/KNN.joblib
+DESIGN copy*.md
+results/bayes_opt.log
