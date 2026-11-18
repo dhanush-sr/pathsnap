@@ -143,12 +143,12 @@
 <aside aria-label="Controls">
   <div class="brand">
     <span class="mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="6" r="2"/><path d="M6.5 16.5 10 12l4 2 3.6-6.6"/></svg></span>
-    <span><b>PathSnap</b><small>Map-matching evaluator</small></span>
+    <span><b>PathSnap</b><small>Laptop 2 · Evaluator UI</small></span>
   </div>
 
   <div class="group">
-    <div class="group-head"><span class="label">API endpoint</span><span class="line"></span></div>
-    <div class="field"><input id="api" aria-label="API endpoint" spellcheck="false" autocomplete="off"></div>
+    <div class="group-head"><span class="label">Laptop 1 · API endpoint</span><span class="line"></span></div>
+    <div class="field"><input id="api" aria-label="Laptop 1 API endpoint" placeholder="http://192.168.x.x:8000" spellcheck="false" autocomplete="off"></div>
     <div class="conn"><span id="conn" class="stamp" data-tone="skipped">Not connected</span><button class="btn" id="connect">Connect</button></div>
   </div>
 
@@ -217,7 +217,7 @@
 <script>
 const $ = id => document.getElementById(id);
 const apiInput = $("api");
-apiInput.value = localStorage.getItem("pathsnap_api") || `http://${location.hostname || "localhost"}:8000`;
+apiInput.value = new URLSearchParams(location.search).get("api") || localStorage.getItem("pathsnap_api") || `http://${location.hostname || "localhost"}:8000`;
 let selected = null, layers = null, busy = false;
 const trips = {}, results = {};
 
