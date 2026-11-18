@@ -19,7 +19,8 @@ from pydantic import BaseModel
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pathsnap.data import ROOT, Trip, trip_ids
 from pathsnap.features import FEATURES, align_route, build_features
-from pathsnap.hmm import argmax_decode, continuity, fill_route, route_scores, viterbi
+from pathsnap.evaluate import argmax_decode, continuity
+from pathsnap.hmm import fill_route, route_scores, viterbi
 
 PARTITION = os.environ.get("PATHSNAP_PARTITION", "student_test")
 RELIABLE_M = 50.0
