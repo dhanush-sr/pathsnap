@@ -11,4 +11,3 @@ results/features_*.pkl
 artifacts/models/RandomForest.joblib
 artifacts/models/KNN.joblib
 DESIGN copy*.md
-results/bayes_opt.log
